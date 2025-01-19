@@ -1,6 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { focusedNft } from "../App";
 
 export function NftSuccessModal({
   isOpen,
@@ -47,7 +46,7 @@ export function NftSuccessModal({
                     }
                   >
                     <img
-                      src={focusedNft.image}
+                      src={'https://i.etsystatic.com/37287876/r/il/8506d4/6468826734/il_fullxfull.6468826734_1ntu.jpg'}
                       alt={"nft"}
                       className={"w-full rounded-xl"}
                     />

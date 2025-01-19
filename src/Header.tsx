@@ -1,5 +1,4 @@
 import { ReactNode, useEffect, useState } from "react";
-import { focusedNft } from "./App.tsx";
 import { TestCardsModal } from "./modals/TestCardsModal.tsx";
 import logo from './assets/logo.png';
 
@@ -67,7 +66,7 @@ export function Header() {
         } fixed top-24 bg-slate-100/90 shadow-xl transition-all duration-500 fade-in backdrop-blur-2xl flex items-center space-x-2 p-2 z-40 rounded-full`}
       >
         <img
-          src={focusedNft.image}
+          src={'https://i.etsystatic.com/37287876/r/il/8506d4/6468826734/il_fullxfull.6468826734_1ntu.jpg'}
           alt={"nft"}
           className={"w-7 h-7 rounded-full"}
         />

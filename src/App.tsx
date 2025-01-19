@@ -5,12 +5,6 @@ import { CoinflowForm } from "./CoinflowForm";
 import { Header } from "./Header";
 import {DirectPurchaseForm} from "./DirectPurchaseForm.tsx";
 
-export const focusedNft = {
-  image:
-    "https://img.freepik.com/free-vector/cartoon-style-blue-shield_78370-1110.jpg",
-  name: "Shield",
-};
-
 function App() {
   return (
     <ContextWrapper>
