@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { TestCardsModal } from "./modals/TestCardsModal.tsx";
 import logo from './assets/logo.png';
+import {MERCHANT_ID} from "./constants.ts";
 
 export function Header() {
   const [showHeader, setShowHeader] = useState<boolean>(false);
@@ -47,12 +48,12 @@ export function Header() {
               Test Cards
             </span>
           </OutlineButton>
-          <OutlineButton onClick={() => setTestCardsOpen(true)}>
+          <OutlineButton onClick={() => window.open('https://sandbox-merchant.coinflow.cash/seller/login', '_blank')}>
             <span className={"font-normal text-xs whitespace-nowrap"}>
               Login
             </span>
           </OutlineButton>
-          <OutlineButton onClick={() => setTestCardsOpen(true)}>
+          <OutlineButton onClick={() => window.open(`https://sandbox-merchant.coinflow.cash/seller/register?sellerId=${crypto.randomUUID()}&country=US&parentId=${MERCHANT_ID}&kycType=person`, '_blank')}>
             <span className={"font-normal text-xs whitespace-nowrap"}>
               Sign Up
             </span>
