@@ -1,10 +1,8 @@
 import { ReactNode, useEffect, useState } from "react";
-import { usePrivy } from "@privy-io/react-auth";
 import { focusedNft } from "./App.tsx";
 import { TestCardsModal } from "./modals/TestCardsModal.tsx";
 
 export function Header() {
-  const { user, logout } = usePrivy();
   const [showHeader, setShowHeader] = useState<boolean>(false);
   const [testCardsOpen, setTestCardsOpen] = useState<boolean>(false);
 
@@ -52,7 +50,6 @@ export function Header() {
             </span>
           </OutlineButton>
         </div>
-        {user && <OutlineButton onClick={logout}>Logout</OutlineButton>}
       </div>
 
       <div

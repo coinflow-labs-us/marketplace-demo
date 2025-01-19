@@ -1,10 +1,6 @@
-import { useState } from "react";
 import { focusedNft } from "./App";
-import { useWallet } from "./wallet/Wallet";
 
 export function DirectPurchaseForm() {
-  const { wallet } = useWallet();
-  const [copied, setCopied] = useState(false);
   return (
     <div
       className={
@@ -41,27 +37,6 @@ export function DirectPurchaseForm() {
         </div>
       </div>
       <div className={"flex-1"} />
-      {wallet && wallet.publicKey ? (
-        <div className="flex space-x-2 items-center pt-4 px-8 pb-0 md:pb-10">
-          <span className="text-xs text-slate-900 ">
-            Welcome back, user {wallet.publicKey.toString()}
-          </span>
-          <button
-            onClick={() => {
-              navigator.clipboard.writeText(wallet.publicKey?.toString() || "");
-              setCopied(true);
-              setTimeout(() => setCopied(false), 1000);
-            }}
-            className={`outline-none focus:outline-none border-none transition text-[11px] ${
-              copied
-                ? "bg-green-50 text-green-900"
-                : "text-slate-600 hover:bg-slate-100 bg-slate-50"
-            } px-1.5 py-0.5 rounded-xl flex items-center justify-center`}
-          >
-            {copied ? "Copied" : "Copy"}
-          </button>
-        </div>
-      ) : null}
     </div>
   );
 }

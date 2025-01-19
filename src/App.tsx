@@ -1,12 +1,8 @@
-import { ReactNode, useCallback, useEffect } from "react";
+import { ReactNode } from "react";
 import "./App.css";
-import { useWallet, WalletContextProvider } from "./wallet/Wallet";
 import { BrowserRouter } from "react-router-dom";
 import { CoinflowForm } from "./CoinflowForm";
 import { Header } from "./Header";
-import { LoginModal } from "./modals/LoginModal.tsx";
-import { useSolanaWallets, usePrivy } from "@privy-io/react-auth";
-import console from "console";
 import {DirectPurchaseForm} from "./DirectPurchaseForm.tsx";
 
 export const focusedNft = {
@@ -16,34 +12,6 @@ export const focusedNft = {
 };
 
 function App() {
-  const { createWallet } = useSolanaWallets();
-
-  const {
-    user,
-    authenticated,
-    isModalOpen,
-    createWallet: createEvmWallet,
-  } = usePrivy();
-
-  const createWallets = useCallback(async () => {
-    if (user) {
-      const hasExistingSolanaWallet = !!user.linkedAccounts.find(
-        (account) =>
-          account.type === "wallet" &&
-          account.walletClientType === "privy" &&
-          account.chainType === "solana"
-      );
-      if (!hasExistingSolanaWallet) {
-        if (user.linkedAccounts.length === 1) await createEvmWallet(); // Privy docs recommend creating EVM wallet first
-        await createWallet();
-      }
-    }
-  }, [createEvmWallet, createWallet, user]);
-
-  useEffect(() => {
-    if (user && authenticated && !isModalOpen) createWallets().catch();
-  }, [authenticated, createWallets, user, isModalOpen]);
-
   return (
     <ContextWrapper>
       <AppContent />
@@ -52,10 +20,6 @@ function App() {
 }
 
 function AppContent() {
-  const { user, ready } = usePrivy();
-
-  if (!user || !ready) return <LoginModal />;
-
   return (
       <div
         className={
@@ -76,14 +40,6 @@ function AppContent() {
 }
 
 function CoinflowContent() {
-  const { user } = usePrivy();
-  const { wallet } = useWallet();
-
-  console.log({ wallet });
-  console.log({ user });
-
-  if (!wallet.publicKey) return null;
-
   return <CoinflowForm />;
 }
 
@@ -113,9 +69,7 @@ export function LoadingSpinner({ className }: { className?: string }) {
 
 function ContextWrapper({ children }: { children: ReactNode }) {
   return (
-    <WalletContextProvider>
       <BrowserRouter>{children}</BrowserRouter>
-    </WalletContextProvider>
   );
 }
 
