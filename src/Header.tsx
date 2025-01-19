@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { focusedNft } from "./App.tsx";
 import { TestCardsModal } from "./modals/TestCardsModal.tsx";
+import logo from './assets/logo.png';
 
 export function Header() {
   const [showHeader, setShowHeader] = useState<boolean>(false);
@@ -30,23 +31,31 @@ export function Header() {
         className={`py-2 flex w-full items-center space-x-3 mx-auto z-50 max-w-3xl`}
       >
         <img
-          src={
-            "https://img.freepik.com/free-vector/cartoon-style-blue-shield_78370-1110.jpg"
-          }
-          alt={"Shield"}
-          className={"w-4 object-contain"}
+          src={logo}
+          alt={"Artisan Square"}
+          className={"w-10 object-contain"}
         />
         <span
           className={"hidden lg:flex font-extrabold text-slate-900 text-sm"}
         >
-          Battle Brawlers
+          Artisan Square
         </span>
         <div className={"flex-1"} />
 
-        <div className={"joyride-step-5"}>
+        <div className={"flex flex-row space-x-4 joyride-step-5"}>
           <OutlineButton onClick={() => setTestCardsOpen(true)}>
             <span className={"font-normal text-xs whitespace-nowrap"}>
               Test Cards
+            </span>
+          </OutlineButton>
+          <OutlineButton onClick={() => setTestCardsOpen(true)}>
+            <span className={"font-normal text-xs whitespace-nowrap"}>
+              Login
+            </span>
+          </OutlineButton>
+          <OutlineButton onClick={() => setTestCardsOpen(true)}>
+            <span className={"font-normal text-xs whitespace-nowrap"}>
+              Sign Up
             </span>
           </OutlineButton>
         </div>

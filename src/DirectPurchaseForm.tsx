@@ -1,5 +1,3 @@
-import { focusedNft } from "./App";
-
 export function DirectPurchaseForm() {
   return (
     <div
@@ -24,7 +22,7 @@ export function DirectPurchaseForm() {
               }
             >
               <img
-                src={focusedNft.image}
+                src={'https://i.etsystatic.com/37287876/r/il/8506d4/6468826734/il_fullxfull.6468826734_1ntu.jpg'}
                 alt={"nft"}
                 className={"w-full rounded-lg ring-1 ring-black/5"}
               />
@@ -46,7 +44,7 @@ function Total() {
     <div className="flex flex-col mt-6 items-end flex-1 justify-end ">
       <span className="text-xs text-slate-500">Price</span>
       <span className="text-slate-900 font-extrabold text-xl lg:text-3xl joyride-step-2">
-        $20.00
+        $50.00
       </span>
     </div>
   );
@@ -55,7 +53,7 @@ function Total() {
 function SupplyIndicator() {
   return (
     <>
-      <span className="font-extrabold text-xl text-slate-900">Basic Shield</span>
+      <span className="font-extrabold text-xl text-slate-900">Wooden Bitcoin Sign</span>
 
       <div className={"flex space-x-4 items-center mt-3"}>
         <div
@@ -63,22 +61,22 @@ function SupplyIndicator() {
             "flex space-x-1 items-center rounded-xl p-2 bg-orange-50 ring-1 ring-orange-100"
           }
         >
-          <span className={"text-xs text-white"}>🪖.</span>
+          <span className={"text-xs text-white"}>🪵.</span>
           <span className={"text-xs font-semibold text-slate-900"}>
-            Protection:{" "}
+            Material:{" "}
           </span>
-          <span className={"text-xs font-bold text-orange-600"}>3x </span>
+          <span className={"text-xs font-bold text-orange-600"}>Maple </span>
         </div>
         <div
           className={
             "flex space-x-1 items-center rounded-xl p-2 bg-indigo-50 ring-1 ring-indigo-100"
           }
         >
-          <span className={"text-xs text-white"}>🧱</span>
+          <span className={"text-xs text-white"}>📏</span>
           <span className={"text-xs font-semibold text-slate-900"}>
-            Weight:{" "}
+            Dimensions:{" "}
           </span>
-          <span className={"text-xs font-bold text-indigo-600"}>2x </span>
+          <span className={"text-xs font-bold text-indigo-600"}>14"x14" </span>
         </div>
       </div>
     </>
