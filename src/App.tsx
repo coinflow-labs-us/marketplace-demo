@@ -1,9 +1,10 @@
-import { ReactNode } from "react";
+import {ReactNode, useEffect, useState} from "react";
 import "./App.css";
-import { BrowserRouter } from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import { CoinflowForm } from "./CoinflowForm";
 import { Header } from "./Header";
 import {DirectPurchaseForm} from "./DirectPurchaseForm.tsx";
+import {API_KEY} from "./constants.ts";
 
 function App() {
   return (
@@ -14,6 +15,27 @@ function App() {
 }
 
 function AppContent() {
+  const [sellerId, setSellerId] = useState("");
+
+  const [sellers, setSellers] = useState<string[]>([]);
+
+  useEffect(() => {
+    const url = 'https://api-sandbox.coinflow.cash/api/merchant/sellers?page=1&limit=100&search=&since=1737266400000&sortDirection=-1&sortBy=sales';
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        Authorization: API_KEY,
+      },
+    };
+
+    fetch(url, options)
+      .then(res => res.json())
+      .then((arr: {merchantId: string}[]) => setSellers(arr.map(({merchantId}) => merchantId)))
+      .catch(err => console.error(err));
+  }, []);
+
   return (
       <div
         className={
@@ -26,15 +48,28 @@ function AppContent() {
             "grid grid-cols-1 pt-10 md:grid-cols-2 gap-0 md:gap-12 w-full h-full max-w-3xl mx-auto"
           }
         >
-          <DirectPurchaseForm />
-          <CoinflowContent />
+          {sellerId ? (
+            <>
+              <DirectPurchaseForm />
+              <CoinflowContent sellerId={sellerId} />
+            </>
+          ) : (
+            <div className={'flex flex-col space-x-4 text-black w-full justify-center'}>
+              <div>Select Seller</div>
+              {sellers.map((seller) => (
+                <div className={'p-4 bg-amber-50 rounded-xl'} key={seller} onClick={() => setSellerId(seller)}>
+                  {seller}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
   );
 }
 
-function CoinflowContent() {
-  return <CoinflowForm />;
+function CoinflowContent({sellerId}: {sellerId: string}) {
+  return <CoinflowForm sellerId={sellerId} />;
 }
 
 export function LoadingSpinner({ className }: { className?: string }) {

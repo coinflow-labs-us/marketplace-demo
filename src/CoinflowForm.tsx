@@ -2,20 +2,19 @@ import {useCallback, useEffect, useState} from "react";
 import { NftSuccessModal } from "./modals/NftSuccessModal";
 import { LoadingSpinner } from "./App.tsx";
 import {API_KEY} from "./constants.ts";
-import {useSearchParams} from "react-router-dom";
 
-export function CoinflowForm() {
+export function CoinflowForm({sellerId}: {sellerId: string}) {
   const [nftSuccessOpen, setNftSuccessOpen] = useState<boolean>(false);
 
   return (
     <div className={"w-full flex-1 "}>
-      <CoinflowPurchaseWrapper/>
+      <CoinflowPurchaseWrapper sellerId={sellerId}/>
       <NftSuccessModal isOpen={nftSuccessOpen} setIsOpen={setNftSuccessOpen} />
     </div>
   );
 }
 
-function CoinflowPurchaseWrapper() {
+function CoinflowPurchaseWrapper({sellerId}: {sellerId: string}) {
   const [height, setHeight] = useState<string>('500');
 
   const handleIframeMessages = useCallback(
@@ -41,7 +40,6 @@ function CoinflowPurchaseWrapper() {
     };
   }, [handleIframeMessages]);
 
-  const [searchParams] = useSearchParams();
   const [url, setUrl] = useState("");
 
   useEffect(() => {
@@ -53,7 +51,7 @@ function CoinflowPurchaseWrapper() {
         'content-type': 'application/json',
         'x-coinflow-auth-user-id': crypto.randomUUID(),
         Authorization: API_KEY,
-        'x-coinflow-submerchant-id': searchParams.get('sellerId')!,
+        'x-coinflow-submerchant-id': sellerId,
       },
       body: JSON.stringify({
         subtotal: {currency: 'USD', cents: 5000},
@@ -67,7 +65,7 @@ function CoinflowPurchaseWrapper() {
       .then(res => res.json())
       .then(({link}) => setUrl(link))
       .catch(err => console.error(err));
-  }, [searchParams]);
+  }, [sellerId]);
 
   if (!url) {
     return (
