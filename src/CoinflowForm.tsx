@@ -69,10 +69,12 @@ function CoinflowPurchaseWrapper({sellerId}: {sellerId: string}) {
 
   if (!url) {
     return (
-      <div
-        className={"absolute w-full min-h-96 flex items-center justify-center"}
-      >
-        <LoadingSpinner className={"!text-gray-900/20 !fill-gray-900"}/>
+      <div className={"h-full flex-1 w-full relative pb-20"}>
+        <div
+          className={"absolute w-full min-h-96 flex items-center justify-center"}
+        >
+          <LoadingSpinner className={"!text-gray-900/20 !fill-gray-900"}/>
+        </div>
       </div>
     );
   }
@@ -93,5 +95,5 @@ function CoinflowPurchaseWrapper({sellerId}: {sellerId: string}) {
         />
       </div>
     </div>
-  );
-}
+    );
+  }

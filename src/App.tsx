@@ -43,7 +43,7 @@ function AppContent() {
           "w-screen flex flex-col flex-1 relative  h-full min-h-screen"
         }
       >
-        <Header />
+        <Header setSellerId={setSellerId} sellerId={sellerId} />
         <div className={'max-w-3xl mx-auto'}>
           {sellerId ? (
             <div
@@ -56,7 +56,7 @@ function AppContent() {
             </div>
           ) : (
             <div className={'grid grid-cols-4 text-black w-full justify-center gap-4'}>
-              {sellers.map((seller) => (
+              {sellers.reverse().map((seller) => (
                 <Seller sellerId={seller} setSellerId={setSellerId} />
               ))}
             </div>
@@ -68,8 +68,8 @@ function AppContent() {
 
 function Seller({sellerId, setSellerId}: {sellerId: string, setSellerId: (sellerId: string) => void}) {
   return (
-    <div className={'flex flex-col p-4 bg-amber-50 rounded-xl'} key={sellerId} onClick={() => setSellerId(sellerId)}>
-      <img className={'h-25'} src={faker.image.url({width: 200, height: 200})}  alt={sellerId}/>
+    <div className={'flex flex-col p-4 bg-amber-50 rounded-2xl cursor-pointer'} key={sellerId} onClick={() => setSellerId(sellerId)}>
+      <img className={'h-25 rounded-xl'} src={faker.image.url({width: 200, height: 200})}  alt={sellerId}/>
       <span className={'font-semibold text-lg'}>{faker.person.firstName()}{'\'s Storefront'}</span>
       <span className={'text-slate-400 text-[10px]'}>{sellerId}</span>
     </div>

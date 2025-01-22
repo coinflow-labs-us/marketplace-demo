@@ -3,14 +3,15 @@ import { TestCardsModal } from "./modals/TestCardsModal.tsx";
 import logo from './assets/logo.png';
 import {MERCHANT_ID} from "./constants.ts";
 
-export function Header() {
+export function Header({sellerId, setSellerId}: {sellerId: string, setSellerId: (sellerId: string) => void}) {
   const [showHeader, setShowHeader] = useState<boolean>(false);
   const [testCardsOpen, setTestCardsOpen] = useState<boolean>(false);
 
   useEffect(() => {
+    if (!sellerId) return;
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [sellerId]);
 
   function handleScroll() {
     const scrollTop = window.scrollY;
@@ -28,7 +29,8 @@ export function Header() {
       }
     >
       <div
-        className={`py-2 flex w-full items-center space-x-3 mx-auto z-50 max-w-3xl`}
+        className={`py-2 flex w-full items-center space-x-3 mx-auto z-50 max-w-3xl cursor-pointer`}
+        onClick={() => setSellerId('')}
       >
         <img
           src={logo}
@@ -38,7 +40,7 @@ export function Header() {
         <span
           className={"hidden lg:flex font-extrabold text-slate-900 text-sm"}
         >
-          Artisan Square
+          Artisan's Square
         </span>
         <div className={"flex-1"} />
 
