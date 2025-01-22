@@ -5,6 +5,7 @@ import { CoinflowForm } from "./CoinflowForm";
 import { Header } from "./Header";
 import {DirectPurchaseForm} from "./DirectPurchaseForm.tsx";
 import {API_KEY} from "./constants.ts";
+import { faker } from "@faker-js/faker";
 
 function App() {
   return (
@@ -43,23 +44,20 @@ function AppContent() {
         }
       >
         <Header />
-        <div
-          className={
-            "grid grid-cols-1 pt-10 md:grid-cols-2 gap-0 md:gap-12 w-full h-full max-w-3xl mx-auto"
-          }
-        >
+        <div className={'max-w-3xl mx-auto'}>
           {sellerId ? (
-            <>
-              <DirectPurchaseForm />
-              <CoinflowContent sellerId={sellerId} />
-            </>
+            <div
+              className={
+                "grid grid-cols-1 pt-10 md:grid-cols-2 gap-0 md:gap-12 w-full h-full"
+              }
+            >
+              <DirectPurchaseForm/>
+              <CoinflowContent sellerId={sellerId}/>
+            </div>
           ) : (
-            <div className={'flex flex-col space-x-4 text-black w-full justify-center'}>
-              <div>Select Seller</div>
+            <div className={'grid grid-cols-4 text-black w-full justify-center gap-4'}>
               {sellers.map((seller) => (
-                <div className={'p-4 bg-amber-50 rounded-xl'} key={seller} onClick={() => setSellerId(seller)}>
-                  {seller}
-                </div>
+                <Seller sellerId={seller} setSellerId={setSellerId} />
               ))}
             </div>
           )}
@@ -68,11 +66,21 @@ function AppContent() {
   );
 }
 
-function CoinflowContent({sellerId}: {sellerId: string}) {
-  return <CoinflowForm sellerId={sellerId} />;
+function Seller({sellerId, setSellerId}: {sellerId: string, setSellerId: (sellerId: string) => void}) {
+  return (
+    <div className={'flex flex-col p-4 bg-amber-50 rounded-xl'} key={sellerId} onClick={() => setSellerId(sellerId)}>
+      <img className={'h-25'} src={faker.image.url({width: 200, height: 200})}  alt={sellerId}/>
+      <span className={'font-semibold text-lg'}>{faker.person.firstName()}{'\'s Storefront'}</span>
+      <span className={'text-slate-400 text-[10px]'}>{sellerId}</span>
+    </div>
+  );
 }
 
-export function LoadingSpinner({ className }: { className?: string }) {
+function CoinflowContent({sellerId}: { sellerId: string }) {
+  return <CoinflowForm sellerId={sellerId}/>;
+}
+
+export function LoadingSpinner({className }: { className?: string }) {
   return (
     <div role="status">
       <svg
