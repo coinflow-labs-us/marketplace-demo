@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: demo-marketplace
+    domains:
+      - demo-marketplace.coinflow.cash
+    runtime: static
+    branch: main
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
