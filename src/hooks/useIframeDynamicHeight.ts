@@ -5,7 +5,7 @@ export function useIframeDynamicHeight() {
 
   const handleIframeMessages = useCallback(
     ({data, origin}: {data: string; origin: string}) => {
-      if (!origin.includes('coinflow.cash')) return;
+      if (!origin.includes('coinflow.cash') && !origin.includes('localhost')) return;
 
       try {
         const message = JSON.parse(data);

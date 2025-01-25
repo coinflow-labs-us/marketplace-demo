@@ -13,7 +13,7 @@ const headers = {
 
 export function CoinflowForm({sellerId}: {sellerId: string}) {
   return (
-    <div className={"w-full flex-1 "}>
+    <div className={"w-full flex-1"}>
       <CoinflowPurchaseForm sellerId={sellerId} args={args} headers={headers} />
     </div>
   );
