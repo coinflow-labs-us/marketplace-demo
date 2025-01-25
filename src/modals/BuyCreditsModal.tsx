@@ -3,6 +3,7 @@ import {Fragment, useMemo, useState} from "react";
 import {useEmailWallet} from "../hooks/useEmailWallet.ts";
 import {CoinflowPurchaseForm} from "../components/CoinflowPurchaseForm.tsx";
 import { Input } from '@headlessui/react'
+import {useCreditBalance} from "../hooks/useCreditBalance.ts";
 
 export function BuyCreditsModal({
   isOpen,
@@ -71,13 +72,14 @@ const args = {
   subtotal: {currency: 'USD', cents: 55_00},
   blockchain: 'solana',
   settlementType: 'Credits',
-  feePercentage: 10
+  fixedFee: {cents: 5_00}
 };
 
 export function BuyCreditsContent() {
-  const [ephemeralEmail, setEphemeralEmail] = useState("");
-  const [email, setEmail] = useState("");
+  const [ephemeralEmail, setEphemeralEmail] = useState("ben@coinflowlabs.app");
+  const [email, setEmail] = useState("ben@coinflowlabs.app");
   const wallet = useEmailWallet(email);
+  const balance = useCreditBalance(wallet);
 
   const headers = useMemo(
     () => ({'x-coinflow-auth-wallet': wallet, 'x-coinflow-auth-blockchain': 'solana'}),
@@ -86,6 +88,12 @@ export function BuyCreditsContent() {
 
   return (
     <>
+    <Dialog.Title
+      as="h3"
+      className="text-md leading-6 text-slate-900 font-semibold"
+    >
+      Credit Balance ${balance.cents / 100}
+    </Dialog.Title>
     <Field>
       <Dialog.Title
         as="h4"

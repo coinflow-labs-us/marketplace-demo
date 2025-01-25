@@ -1,12 +1,11 @@
 import {useEffect, useState} from "react";
-import {API_KEY} from "../constants.ts";
+import {API_KEY, BASE_URL} from "../constants.ts";
 
 export function useEmailWallet(email: string) {
   const [wallet, setWallet] = useState("");
 
   useEffect(() => {
-    // const url = 'https://api-sandbox.coinflow.cash/api/marketplace/wallet';
-    const url = 'http://localhost:5000/api/marketplace/wallet';
+    const url = `${BASE_URL}/api/marketplace/wallet`;
     const options = {
       method: 'POST',
       headers: {
