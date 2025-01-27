@@ -1,7 +1,7 @@
 import {Dialog, Field, Transition} from "@headlessui/react";
 import {Fragment, useMemo, useState} from "react";
 import {useEmailWallet} from "../hooks/useEmailWallet.ts";
-import {CoinflowPurchaseForm} from "../components/CoinflowPurchaseForm.tsx";
+import {CoinflowCardPurchaseForm} from "../components/CoinflowCardPurchaseForm.tsx";
 import { Input } from '@headlessui/react'
 import {useCreditBalance} from "../hooks/useCreditBalance.ts";
 
@@ -109,7 +109,7 @@ export function BuyCreditsContent() {
         onBlur={() => setEmail(ephemeralEmail)}
       />
     </Field>
-      {wallet && <CoinflowPurchaseForm sellerId={''} args={args} headers={headers} />}
+      {wallet && <CoinflowCardPurchaseForm sellerId={''} args={args} headers={headers} />}
     </>
   );
 }

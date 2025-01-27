@@ -2,7 +2,7 @@ import {useIframeDynamicHeight} from "../hooks/useIframeDynamicHeight.ts";
 import {LoadingSpinner} from "../App.tsx";
 import {useCoinflowUrl} from "../hooks/useCoinflowUrl.ts";
 
-export function CoinflowPurchaseForm({sellerId, args, headers}: {sellerId: string, args: object, headers: object}) {
+export function CoinflowCardPurchaseForm({sellerId, args, headers}: {sellerId: string, args: object, headers: object}) {
   const height = useIframeDynamicHeight();
   const url = useCoinflowUrl({sellerId, args, headers});
 

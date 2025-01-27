@@ -12,7 +12,7 @@ export function useIframeDynamicHeight() {
         if (message.method !== 'heightChange') return;
         setHeight(message.data);
       } catch (e) {
-        console.error(e);
+        return;
       }
     },
     []
