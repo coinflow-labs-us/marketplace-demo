@@ -3,7 +3,7 @@ export function CoinflowCreditsPurchaseForm({sellerId, subtotal}: {sellerId: str
 
   return (
     <div className={"h-full flex-1 w-full relative"}>
-      <div style={{height: `${500}px`, minHeight: `${500}px`, width: '350px'}}
+      <div style={{height: `${450}px`, minHeight: `${450}px`, width: '350px'}}
            className={
              "flex-col h-full flex mx-auto relative overflow-hidden rounded-none md:rounded-xl md:border border-black/5"
            }
