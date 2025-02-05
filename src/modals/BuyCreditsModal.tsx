@@ -76,8 +76,8 @@ const args = {
 };
 
 export function BuyCreditsContent() {
-  const [ephemeralEmail, setEphemeralEmail] = useState("ben@coinflowlabs.app");
-  const [email, setEmail] = useState("ben@coinflowlabs.app");
+  const [ephemeralEmail, setEphemeralEmail] = useState("");
+  const [email, setEmail] = useState("");
   const wallet = useEmailWallet(email);
   const balance = useCreditBalance(wallet);
 
