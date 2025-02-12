@@ -4,7 +4,7 @@ import {BrowserRouter} from "react-router-dom";
 import { CoinflowForm } from "./CoinflowForm";
 import { Header } from "./Header";
 import {DirectPurchaseForm} from "./DirectPurchaseForm.tsx";
-import {API_KEY} from "./constants.ts";
+import {API_KEY, BASE_URL} from "./constants.ts";
 import { faker } from "@faker-js/faker";
 
 function App() {
@@ -21,7 +21,7 @@ function AppContent() {
   const [sellers, setSellers] = useState<string[]>([]);
 
   useEffect(() => {
-    const url = 'https://api-sandbox.coinflow.cash/api/merchant/sellers?page=1&limit=100&search=&since=1737266400000&sortDirection=-1&sortBy=sales';
+    const url = `${BASE_URL}/api/merchant/sellers?page=1&limit=100&search=&since=1737266400000&sortDirection=-1&sortBy=sales`;
     const options = {
       method: 'GET',
       headers: {

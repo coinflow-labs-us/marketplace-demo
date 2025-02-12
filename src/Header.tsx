@@ -2,10 +2,12 @@ import { ReactNode, useEffect, useState } from "react";
 import { TestCardsModal } from "./modals/TestCardsModal.tsx";
 import logo from './assets/logo.png';
 import {MERCHANT_ID} from "./constants.ts";
+import {BuyCreditsModal} from "./modals/BuyCreditsModal.tsx";
 
 export function Header({sellerId, setSellerId}: {sellerId: string, setSellerId: (sellerId: string) => void}) {
   const [showHeader, setShowHeader] = useState<boolean>(false);
   const [testCardsOpen, setTestCardsOpen] = useState<boolean>(false);
+  const [buyCreditsOpen, setBuyCreditsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (!sellerId) return;
@@ -45,17 +47,22 @@ export function Header({sellerId, setSellerId}: {sellerId: string, setSellerId: 
         <div className={"flex-1"} />
 
         <div className={"flex flex-row space-x-4 joyride-step-5"}>
+          <OutlineButton onClick={() => setBuyCreditsOpen(true)}>
+            <span className={"font-normal text-xs whitespace-nowrap"}>
+              Buy Credits
+            </span>
+          </OutlineButton>
           <OutlineButton onClick={() => setTestCardsOpen(true)}>
             <span className={"font-normal text-xs whitespace-nowrap"}>
               Test Cards
             </span>
           </OutlineButton>
-          <OutlineButton onClick={() => window.open('https://sandbox-merchant.coinflow.cash/seller/login', '_blank')}>
+          <OutlineButton onClick={() => window.open(`${import.meta.env.VITE_MERCHANT_URL}/seller/login`, '_blank')}>
             <span className={"font-normal text-xs whitespace-nowrap"}>
               Login
             </span>
           </OutlineButton>
-          <OutlineButton onClick={() => window.open(`https://sandbox-merchant.coinflow.cash/seller/register?sellerId=${crypto.randomUUID()}&country=US&parentId=${MERCHANT_ID}&kycType=person`, '_blank')}>
+          <OutlineButton onClick={() => window.open(`${import.meta.env.VITE_MERCHANT_URL}/seller/register?sellerId=${crypto.randomUUID()}&country=US&parentId=${MERCHANT_ID}&kycType=person`, '_blank')}>
             <span className={"font-normal text-xs whitespace-nowrap"}>
               Sign Up
             </span>
@@ -76,6 +83,7 @@ export function Header({sellerId, setSellerId}: {sellerId: string, setSellerId: 
         <span className={"text-sm font-bold text-slate-900"}>$20.00</span>
       </div>
       <TestCardsModal isOpen={testCardsOpen} setIsOpen={setTestCardsOpen} />
+      <BuyCreditsModal isOpen={buyCreditsOpen} setIsOpen={setBuyCreditsOpen}/>
     </div>
   );
 }

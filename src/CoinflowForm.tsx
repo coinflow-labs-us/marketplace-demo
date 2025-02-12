@@ -1,99 +1,31 @@
-import {useCallback, useEffect, useState} from "react";
-import { NftSuccessModal } from "./modals/NftSuccessModal";
-import { LoadingSpinner } from "./App.tsx";
-import {API_KEY} from "./constants.ts";
+import {CoinflowCardPurchaseForm} from "./components/CoinflowCardPurchaseForm.tsx";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
+import {CoinflowCreditsPurchaseForm} from "./components/CoinflowCreditsPurchaseForm.tsx";
+
+const args = {
+  subtotal: {currency: 'USD', cents: 5000},
+  blockchain: 'solana',
+  settlementType: 'USDC',
+  feePercentage: 10
+};
+
+const headers = {
+  'x-coinflow-auth-user-id': crypto.randomUUID(),
+};
 
 export function CoinflowForm({sellerId}: {sellerId: string}) {
-  const [nftSuccessOpen, setNftSuccessOpen] = useState<boolean>(false);
-
   return (
-    <div className={"w-full flex-1 "}>
-      <CoinflowPurchaseWrapper sellerId={sellerId}/>
-      <NftSuccessModal isOpen={nftSuccessOpen} setIsOpen={setNftSuccessOpen} />
+    <div className={"w-full flex-1"}>
+      <TabGroup>
+        <TabList className={'bg-amber-50 p-2 rounded-full mb-2'}>
+          <Tab className="data-[selected]:bg-amber-300 rounded-full bg-amber-50 text-slate-900 data-[hover]:bg-amber-100">Cards</Tab>
+          <Tab className="data-[selected]:bg-amber-300 rounded-full bg-amber-50 text-slate-900 data-[hover]:bg-amber-100">Credits</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel><CoinflowCardPurchaseForm sellerId={sellerId} args={args} headers={headers} /></TabPanel>
+          <TabPanel><CoinflowCreditsPurchaseForm sellerId={sellerId} subtotal={args.subtotal}/></TabPanel>
+        </TabPanels>
+      </TabGroup>
     </div>
   );
 }
-
-function CoinflowPurchaseWrapper({sellerId}: {sellerId: string}) {
-  const [height, setHeight] = useState<string>('500');
-
-  const handleIframeMessages = useCallback(
-    ({data, origin}: {data: string; origin: string}) => {
-      if (!origin.includes('coinflow.cash')) return;
-
-      try {
-        const message = JSON.parse(data);
-        if (message.method !== 'heightChange') return;
-        setHeight(message.data);
-      } catch (e) {
-        console.error(e);
-      }
-    },
-    []
-  );
-
-  useEffect(() => {
-    if (!window) throw new Error('Window not defined');
-    window.addEventListener('message', handleIframeMessages);
-    return () => {
-      window.removeEventListener('message', handleIframeMessages);
-    };
-  }, [handleIframeMessages]);
-
-  const [url, setUrl] = useState("");
-
-  useEffect(() => {
-    const url = 'https://api-sandbox.coinflow.cash/api/checkout/link';
-    const options = {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        'x-coinflow-auth-user-id': crypto.randomUUID(),
-        Authorization: API_KEY,
-        'x-coinflow-submerchant-id': sellerId,
-      },
-      body: JSON.stringify({
-        subtotal: {currency: 'USD', cents: 5000},
-        blockchain: 'solana',
-        settlementType: 'USDC',
-        feePercentage: 10
-      })
-    };
-
-    fetch(url, options)
-      .then(res => res.json())
-      .then(({link}) => setUrl(link))
-      .catch(err => console.error(err));
-  }, [sellerId]);
-
-  if (!url) {
-    return (
-      <div className={"h-full flex-1 w-full relative pb-20"}>
-        <div
-          className={"absolute w-full min-h-96 flex items-center justify-center"}
-        >
-          <LoadingSpinner className={"!text-gray-900/20 !fill-gray-900"}/>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className={"h-full flex-1 w-full relative pb-20"}>
-      <div
-        style={{height: `${height}px`, minHeight: `${height}px`}}
-        className={
-          "flex-col h-full flex mx-auto relative overflow-hidden rounded-none md:rounded-xl md:border border-black/5"
-        }
-      >
-        <iframe
-          allow={'payment'}
-          scrolling="no"
-          style={{height: '100%', width: '100%'}}
-          src={url + '&useHeightChange=true'}
-        />
-      </div>
-    </div>
-    );
-  }
