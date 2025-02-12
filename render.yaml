@@ -22,6 +22,8 @@ services:
         value: zero-day-demo
       - key: VITE_API_KEY
         value: coinflow_sandbox_f7566868ac974f2883c4b4f850a1f6c1_0248cf93c2754d76a8f9da20966932d5
+      - key: VITE_MARKETPLACE_URL
+        value: https://sandbox-marketplace.coinflow.cash
 
 # Staging
   - type: web
@@ -45,4 +47,5 @@ services:
         value: meedmart
       - key: VITE_API_KEY
         value: coinflow_sandbox_6fbd771825a04614aa0e216ca72bbd8c_51d7793fc97644faa4a4768823201156
-
+      - key: VITE_MARKETPLACE_URL
+        value: https://staging-marketplace.coinflow.cash
