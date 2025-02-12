@@ -1,4 +1,6 @@
 services:
+
+# Sandbox
   - type: web
     name: demo-marketplace
     domains:
@@ -11,3 +13,36 @@ services:
       - type: rewrite
         source: /*
         destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://sandbox-api.coinflow.cash
+      - key: VITE_LANDING_URL
+        value: https://sandbox.coinflow.cash
+      - key: VITE_MERCHANT_ID
+        value: zero-day-demo
+      - key: VITE_API_KEY
+        value: coinflow_sandbox_f7566868ac974f2883c4b4f850a1f6c1_0248cf93c2754d76a8f9da20966932d5
+
+# Staging
+  - type: web
+    name: demo-marketplace-staging
+    domains:
+      - demo-marketplace-staging.coinflow.cash
+    runtime: static
+    branch: main
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        value: https://staging-api.coinflow.cash
+      - key: VITE_LANDING_URL
+        value: https://staging.coinflow.cash
+      - key: VITE_MERCHANT_ID
+        value: meedmart
+      - key: VITE_API_KEY
+        value: coinflow_sandbox_6fbd771825a04614aa0e216ca72bbd8c_51d7793fc97644faa4a4768823201156
+
