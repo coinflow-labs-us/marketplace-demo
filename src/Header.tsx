@@ -57,12 +57,12 @@ export function Header({sellerId, setSellerId}: {sellerId: string, setSellerId: 
               Test Cards
             </span>
           </OutlineButton>
-          <OutlineButton onClick={() => window.open('https://sandbox-merchant.coinflow.cash/seller/login', '_blank')}>
+          <OutlineButton onClick={() => window.open(`${import.meta.env.VITE_MERCHANT_URL}/seller/login`, '_blank')}>
             <span className={"font-normal text-xs whitespace-nowrap"}>
               Login
             </span>
           </OutlineButton>
-          <OutlineButton onClick={() => window.open(`https://sandbox-merchant.coinflow.cash/seller/register?sellerId=${crypto.randomUUID()}&country=US&parentId=${MERCHANT_ID}&kycType=person`, '_blank')}>
+          <OutlineButton onClick={() => window.open(`${import.meta.env.VITE_MERCHANT_URL}/seller/register?sellerId=${crypto.randomUUID()}&country=US&parentId=${MERCHANT_ID}&kycType=person`, '_blank')}>
             <span className={"font-normal text-xs whitespace-nowrap"}>
               Sign Up
             </span>
