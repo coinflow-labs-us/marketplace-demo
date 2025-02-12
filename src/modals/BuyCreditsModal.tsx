@@ -94,21 +94,26 @@ export function BuyCreditsContent() {
     >
       Credit Balance ${balance.cents / 100}
     </Dialog.Title>
-    <Field>
-      <Dialog.Title
-        as="h4"
-        className="text-md leading-6 text-slate-900 font-semibold"
-      >
-        Email
-      </Dialog.Title>
-      <Input
-        className={'text-slate-900 rounded-lg p-2 bg-zinc-50 outline outline-1 outline-zinc-100 data-[hover]:shadow data-[focus]:bg-slate-200'}
-        name="email"
-        value={ephemeralEmail}
-        onChange={(e) => setEphemeralEmail(e.target.value)}
-        onBlur={() => setEmail(ephemeralEmail)}
-      />
-    </Field>
+      <Field>
+        <Dialog.Title
+          as="h4"
+          className="text-md leading-6 text-slate-900 font-semibold"
+        >
+          Email
+        </Dialog.Title>
+        <div className={'flex flex-row items-center justify-center space-x-2'}>
+          <Input
+            className={'text-slate-900 rounded-lg p-2 bg-zinc-50 outline outline-1 outline-zinc-100 data-[hover]:shadow data-[focus]:bg-slate-200'}
+            name="email"
+            value={ephemeralEmail}
+            onChange={(e) => setEphemeralEmail(e.target.value)}
+            onBlur={() => setEmail(ephemeralEmail)}
+          />
+          <span className={'text-slate-900 hover:cursor-pointer'}>
+            ➡️
+          </span>
+        </div>
+      </Field>
       {wallet && <CoinflowCardPurchaseForm sellerId={''} args={args} headers={headers} />}
     </>
   );
