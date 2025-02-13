@@ -15,7 +15,7 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        value: https://sandbox-api.coinflow.cash
+        value: https://api-sandbox.coinflow.cash
       - key: VITE_LANDING_URL
         value: https://sandbox.coinflow.cash
       - key: VITE_MERCHANT_ID
@@ -42,7 +42,7 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        value: https://staging-api.coinflow.cash
+        value: https://api-staging.coinflow.cash
       - key: VITE_LANDING_URL
         value: https://staging.coinflow.cash
       - key: VITE_MERCHANT_ID
