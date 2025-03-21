@@ -68,9 +68,9 @@ function AppContent() {
 
 function Seller({sellerId, setSellerId}: {sellerId: string, setSellerId: (sellerId: string) => void}) {
   return (
-    <div className={'flex flex-col p-4 bg-amber-50 rounded-2xl cursor-pointer'} key={sellerId} onClick={() => setSellerId(sellerId)}>
+    <div className={'flex flex-col p-4 bg-[#ecfaff] rounded-2xl cursor-pointer'} key={sellerId} onClick={() => setSellerId(sellerId)}>
       <img className={'h-25 rounded-xl'} src={faker.image.url({width: 200, height: 200})}  alt={sellerId}/>
-      <span className={'font-semibold text-lg'}>{faker.person.firstName()}{'\'s Storefront'}</span>
+      <span className={'font-semibold text-lg'}>{faker.person.firstName()}{'\'s Stream'}</span>
       <span className={'text-slate-400 text-[10px]'}>{sellerId}</span>
     </div>
   );

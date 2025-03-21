@@ -37,13 +37,8 @@ export function Header({sellerId, setSellerId}: {sellerId: string, setSellerId: 
         <img
           src={logo}
           alt={"Artisan Square"}
-          className={"w-10 object-contain"}
+          className={"w-20 object-contain"}
         />
-        <span
-          className={"hidden lg:flex font-extrabold text-slate-900 text-sm"}
-        >
-          Artisan's Square
-        </span>
         <div className={"flex-1"} />
 
         <div className={"flex flex-row space-x-4 joyride-step-5"}>

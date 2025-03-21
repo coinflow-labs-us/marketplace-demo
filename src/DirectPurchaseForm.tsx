@@ -22,7 +22,7 @@ export function DirectPurchaseForm() {
               }
             >
               <img
-                src={'https://i.etsystatic.com/37287876/r/il/8506d4/6468826734/il_fullxfull.6468826734_1ntu.jpg'}
+                src={'https://i.ebayimg.com/images/g/ymkAAOSwjW5hrtft/s-l1200.jpg'}
                 alt={"nft"}
                 className={"w-full rounded-lg ring-1 ring-black/5"}
               />
@@ -53,7 +53,7 @@ function Total() {
 function SupplyIndicator() {
   return (
     <>
-      <span className="font-extrabold text-xl text-slate-900">Wooden Bitcoin Sign</span>
+      <span className="font-extrabold text-xl text-slate-900">Topps Yankees Deck</span>
 
       <div className={"flex space-x-4 items-center mt-3"}>
         <div
@@ -61,11 +61,11 @@ function SupplyIndicator() {
             "flex space-x-1 items-center rounded-xl p-2 bg-orange-50 ring-1 ring-orange-100"
           }
         >
-          <span className={"text-xs text-white"}>🪵.</span>
+          <span className={"text-xs text-white"}>🗓️.</span>
           <span className={"text-xs font-semibold text-slate-900"}>
-            Material:{" "}
+            Year:{" "}
           </span>
-          <span className={"text-xs font-bold text-orange-600"}>Maple </span>
+          <span className={"text-xs font-bold text-orange-600"}>2008 </span>
         </div>
         <div
           className={
@@ -74,9 +74,9 @@ function SupplyIndicator() {
         >
           <span className={"text-xs text-white"}>📏</span>
           <span className={"text-xs font-semibold text-slate-900"}>
-            Dimensions:{" "}
+            Grade:{" "}
           </span>
-          <span className={"text-xs font-bold text-indigo-600"}>14"x14" </span>
+          <span className={"text-xs font-bold text-indigo-600"}>7/10 </span>
         </div>
       </div>
     </>
