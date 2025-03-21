@@ -47,7 +47,7 @@ function AppContent() {
           "w-screen flex flex-col flex-1 relative  h-full min-h-screen"
         }
       >
-        <Header setSellerId={setSellerId} sellerId={sellerId} />
+        <Header setSellerId={setSellerId} />
         <div className={'max-w-3xl mx-auto'}>
           {sellerId ? (
             <div
