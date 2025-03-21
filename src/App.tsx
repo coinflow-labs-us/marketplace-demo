@@ -33,7 +33,11 @@ function AppContent() {
 
     fetch(url, options)
       .then(res => res.json())
-      .then((arr: {merchantId: string}[]) => setSellers(arr.map(({merchantId}) => merchantId)))
+      .then(arr => {
+        console.dir(arr, {depth: null, maxArrayLength: null});
+        return arr;
+      })
+      .then((arr: {merchantId: string, status: string}[]) => setSellers(arr.filter(a => a.status === 'approved').map(({merchantId}) => merchantId)))
       .catch(err => console.error(err));
   }, []);
 
@@ -43,7 +47,7 @@ function AppContent() {
           "w-screen flex flex-col flex-1 relative  h-full min-h-screen"
         }
       >
-        <Header setSellerId={setSellerId} sellerId={sellerId} />
+        <Header setSellerId={setSellerId} />
         <div className={'max-w-3xl mx-auto'}>
           {sellerId ? (
             <div
@@ -68,9 +72,9 @@ function AppContent() {
 
 function Seller({sellerId, setSellerId}: {sellerId: string, setSellerId: (sellerId: string) => void}) {
   return (
-    <div className={'flex flex-col p-4 bg-amber-50 rounded-2xl cursor-pointer'} key={sellerId} onClick={() => setSellerId(sellerId)}>
+    <div className={'flex flex-col p-4 bg-[#ecfaff] rounded-2xl cursor-pointer'} key={sellerId} onClick={() => setSellerId(sellerId)}>
       <img className={'h-25 rounded-xl'} src={faker.image.url({width: 200, height: 200})}  alt={sellerId}/>
-      <span className={'font-semibold text-lg'}>{faker.person.firstName()}{'\'s Storefront'}</span>
+      <span className={'font-semibold text-lg'}>{faker.person.firstName()}{'\'s Stream'}</span>
       <span className={'text-slate-400 text-[10px]'}>{sellerId}</span>
     </div>
   );
