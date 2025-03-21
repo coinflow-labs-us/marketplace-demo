@@ -33,7 +33,11 @@ function AppContent() {
 
     fetch(url, options)
       .then(res => res.json())
-      .then((arr: {merchantId: string}[]) => setSellers(arr.map(({merchantId}) => merchantId)))
+      .then(arr => {
+        console.dir(arr, {depth: null, maxArrayLength: null});
+        return arr;
+      })
+      .then((arr: {merchantId: string, status: string}[]) => setSellers(arr.filter(a => a.status === 'approved').map(({merchantId}) => merchantId)))
       .catch(err => console.error(err));
   }, []);
 
